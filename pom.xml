@@ -35,9 +35,9 @@
     <description>Utilities to run server-side JUnit tests remotely</description>
     
     <scm>
-        <connection>scm:svn:http://svn.apache.org/repos/asf/sling/trunk/testing/junit/remote</connection>
+        <connection>scm:git:https://gitbox.apache.org/repos/asf/sling-org-apache-sling-junit-remote.git</conncetion>
         <developerConnection> scm:svn:https://svn.apache.org/repos/asf/sling/trunk/testing/junit/remote</developerConnection>
-        <url>http://svn.apache.org/viewvc/sling/trunk/testing/junit/remote</url>
+        <url>https://gitbox.apache.org/repos/asf?p=sling-org-apache-sling-junit-remote.git.git</url>
     </scm>
 
     <build>
