@@ -17,8 +17,7 @@
  * under the License.
  */
 
-@Version("1.1.0")
+@Version("1.1.1")
 package org.apache.sling.junit.remote.ide;
 
-import aQute.bnd.annotation.Version;
-
+import org.osgi.annotation.versioning.Version;

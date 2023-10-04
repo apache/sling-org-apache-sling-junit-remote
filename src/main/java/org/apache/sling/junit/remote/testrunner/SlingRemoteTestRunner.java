@@ -20,9 +20,9 @@ import java.io.StringReader;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.json.Json;
-import javax.json.JsonArray;
-import javax.json.JsonObject;
+import jakarta.json.Json;
+import jakarta.json.JsonArray;
+import jakarta.json.JsonObject;
 
 import org.apache.sling.jcr.contentparser.impl.JsonTicksConverter;
 import org.apache.sling.junit.remote.httpclient.RemoteTestHttpClient;

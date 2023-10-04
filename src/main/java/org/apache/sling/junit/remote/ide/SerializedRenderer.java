@@ -23,8 +23,8 @@ import java.util.Collection;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.felix.scr.annotations.Component;
-import org.apache.felix.scr.annotations.Service;
+import org.osgi.service.component.annotations.Component;
+
 import org.apache.sling.junit.Renderer;
 import org.apache.sling.junit.RendererFactory;
 import org.apache.sling.junit.TestSelector;
@@ -38,8 +38,10 @@ import org.slf4j.LoggerFactory;
  *  Used to send results, and especially Exceptions, as
  *  is to a remote IDE.      
  */
-@Component(immediate=false)
-@Service
+@Component(
+        immediate = false,
+        service = { Renderer.class, RendererFactory.class }
+        )
 public class SerializedRenderer extends RunListener implements Renderer,RendererFactory {
 
     public static final String EXTENSION = "serialized";
