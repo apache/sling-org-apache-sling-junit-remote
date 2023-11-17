@@ -22,14 +22,13 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.apache.sling</groupId>
-        <artifactId>sling</artifactId>
-        <version>26</version>
+        <artifactId>sling-bundle-parent</artifactId>
+        <version>52</version>
         <relativePath />
     </parent>
 
     <artifactId>org.apache.sling.junit.remote</artifactId>
     <version>1.0.13-SNAPSHOT</version>
-    <packaging>bundle</packaging>
 
     <name>Apache Sling JUnit Remote Tests Runners</name>
     <description>Utilities to run server-side JUnit tests remotely</description>
@@ -39,91 +38,69 @@
         <developerConnection>scm:git:https://gitbox.apache.org/repos/asf/sling-org-apache-sling-junit-remote.git</developerConnection>
         <url>https://github.com/apache/sling-org-apache-sling-junit-remote.git</url>
     </scm>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>maven-scr-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>maven-bundle-plugin</artifactId>
-                <extensions>true</extensions>
-                <configuration>
-                    <instructions>
-                        <Import-Package>
-                            org.apache.http.*; resolution:=optional,
-                            org.apache.sling.testing.tools.http; resolution:=optional,
-                            org.apache.sling.testing.tools.sling; resolution:=optional,
-                            org.junit.internal.*; resolution:=optional,
-                            *
-                        </Import-Package>
-                        <Sling-Test-Regexp>.*Test</Sling-Test-Regexp>
-                        <Embed-Dependency>
-                                org.apache.sling.jcr.contentparser;inline="org/apache/sling/jcr/contentparser/impl/JsonTicksConverter.class"
-                        </Embed-Dependency>
-                    </instructions>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
     
     <dependencies>
         <dependency>
             <groupId>org.osgi</groupId>
-            <artifactId>org.osgi.core</artifactId>
+            <artifactId>org.osgi.service.component.annotations</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.annotation.versioning</artifactId>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.sling</groupId>
             <artifactId>org.apache.sling.junit.core</artifactId>
-            <version>1.0.27-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.felix</groupId>
-            <artifactId>org.apache.felix.scr.annotations</artifactId>
+            <version>1.1.6</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.8.2</version>
             <scope>compile</scope>
         </dependency>
         <!-- SLF4J is needed at runtime (whenever SlingRemoteTestRunner is executed) -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>1.5.11</version>
             <!-- scope must be given explicitly because it has provided scope in the depMgmt -->
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
-            <version>1.5.11</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.sling</groupId>
             <artifactId>org.apache.sling.testing.tools</artifactId>
             <version>1.0.16</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
+            <artifactId>javax.servlet-api</artifactId>
+            <scope>provided</scope>
         </dependency>
         <dependency>
-      <groupId>org.apache.sling</groupId>
-      <artifactId>org.apache.sling.jcr.contentparser</artifactId>
-      <version>1.2.2</version>
-      <scope>provided</scope>
-      <exclusions>
-        <exclusion>
-            <groupId>*</groupId>
-            <artifactId>*</artifactId>
-        </exclusion>
-    </exclusions>
+            <groupId>jakarta.json</groupId>
+            <artifactId>jakarta.json-api</artifactId>
+            <version>2.0.2</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+          <groupId>org.apache.sling</groupId>
+          <artifactId>org.apache.sling.jcr.contentparser</artifactId>
+          <version>1.2.2</version>
+          <scope>provided</scope>
+          <exclusions>
+            <exclusion>
+                <groupId>*</groupId>
+                <artifactId>*</artifactId>
+            </exclusion>
+        </exclusions>
     </dependency>
     </dependencies>
 </project>

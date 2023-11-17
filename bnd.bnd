@@ -1,0 +1,15 @@
+Import-Package:\
+    org.apache.http.*; resolution:=optional,\
+    org.apache.sling.testing.tools.http; resolution:=optional,\
+    org.apache.sling.testing.tools.sling; resolution:=optional,\
+    org.junit.internal.*; resolution:=optional,\
+    *
+
+Sling-Test-Regexp:\
+    .*Test
+
+-includeresource:\
+    @org.apache.sling.jcr.contentparser-*.jar!/org/apache/sling/jcr/contentparser/impl/JsonTicksConverter.class
+
+-removeheaders:\
+  Include-Resource
