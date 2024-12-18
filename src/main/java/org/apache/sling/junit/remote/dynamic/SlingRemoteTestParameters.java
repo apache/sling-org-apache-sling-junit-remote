@@ -16,8 +16,22 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+package org.apache.sling.junit.remote.dynamic;
 
-@Version("1.1.1")
-package org.apache.sling.junit.remote.ide;
+/** Test class "proxies" implement this to indicate where to
+ *  run the tests.
+ */
+public interface SlingRemoteTestParameters {
+    /** Return the URL of the JUnit servlet */
+    String getJunitServletUrl();
 
-import org.osgi.annotation.versioning.Version;
+    /** Return the optional selector for the test classes to run,
+     *  for example "org.apache.sling.testing.samples.sampletests.JUnit4Test"
+     */
+    String getTestClassesSelector();
+
+    /** Return the optional selector for the test methods to run,
+     *  for example "someMethodName"
+     */
+    String getTestMethodSelector();
+}

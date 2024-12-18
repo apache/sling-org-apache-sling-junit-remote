@@ -1,20 +1,22 @@
 /*
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *   http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
  */
-package org.apache.sling.junit.remote.testrunner;
+package org.apache.sling.junit.remote.dynamic;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -35,8 +37,8 @@ public class RemoteExecutionException extends RuntimeException {
      * Matches on lines in the format {@code at package.class.method(source.java:123)} with 4 (1,2,3,4) or
      * {@code at package.class.method(Native method)} with 3 different groups (1,2,5)
      */
-    private static final Pattern TRACE_PATTERN = Pattern
-            .compile("\\s*at\\s+([\\w\\.$_]+)\\.([\\w$_]+)(?:\\((.*\\.java):(\\d+)\\)|(\\(.*\\)))");
+    private static final Pattern TRACE_PATTERN =
+            Pattern.compile("\\s*at\\s+([\\w\\.$_]+)\\.([\\w$_]+)(?:\\((.*\\.java):(\\d+)\\)|(\\(.*\\)))");
     /**
      * Matches on lines in the format {@code Caused by: java.io.IOException: Some message} with 1 group containing the
      * part after the first colon
@@ -69,7 +71,7 @@ public class RemoteExecutionException extends RuntimeException {
             s.print(trace);
         }
     }
-    
+
     @Override
     public void printStackTrace(PrintWriter s) {
         if (trace != null) {
@@ -85,7 +87,7 @@ public class RemoteExecutionException extends RuntimeException {
     /**
      * Returns all StackTraceElement created from the given String. Also evaluates the cause of an exception by setting {@link #initCause(Throwable)}.
      * Example format for given trace:
-     * 
+     *
      * <pre>
      * {@code
      *  java.lang.RuntimeException: Wrapper exception
@@ -100,7 +102,7 @@ public class RemoteExecutionException extends RuntimeException {
      *         ... 23 more
      * }
      * </pre>
-     * 
+     *
      * @param trace a serialized stack trace.
      * @return an array of {@link StackTraceElement}s.
      * @throws IOException

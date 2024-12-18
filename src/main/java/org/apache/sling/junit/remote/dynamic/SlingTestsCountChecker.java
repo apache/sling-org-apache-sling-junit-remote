@@ -16,9 +16,14 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+package org.apache.sling.junit.remote.dynamic;
 
-@Version("1.0.9")
-package org.apache.sling.junit.remote.exported;
-
-import org.osgi.annotation.versioning.Version;
-
+/** Tests classes can implement this interface to check the
+ *  number of tests that are executed remotely. This is useful
+ *  when tests are loaded dynamically, to check that all the required
+ *  tests have indeed been executed, for example in continuous
+ *  integration.
+ */
+public interface SlingTestsCountChecker {
+    void checkNumberOfTests(int numberOfTestsExecuted);
+}
