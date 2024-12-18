@@ -21,4 +21,3 @@
 package org.apache.sling.junit.remote.exported;
 
 import org.osgi.annotation.versioning.Version;
-

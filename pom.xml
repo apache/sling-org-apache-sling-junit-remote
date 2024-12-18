@@ -7,9 +7,9 @@
     to you under the Apache License, Version 2.0 (the
     "License"); you may not use this file except in compliance
     with the License.  You may obtain a copy of the License at
-    
+
     http://www.apache.org/licenses/LICENSE-2.0
-    
+
     Unless required by applicable law or agreed to in writing,
     software distributed under the License is distributed on an
     "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
@@ -23,7 +23,7 @@
     <parent>
         <groupId>org.apache.sling</groupId>
         <artifactId>sling-bundle-parent</artifactId>
-        <version>52</version>
+        <version>62</version>
         <relativePath />
     </parent>
 
@@ -32,13 +32,17 @@
 
     <name>Apache Sling JUnit Remote Tests Runners</name>
     <description>Utilities to run server-side JUnit tests remotely</description>
-    
+
     <scm>
         <connection>scm:git:https://gitbox.apache.org/repos/asf/sling-org-apache-sling-junit-remote.git</connection>
         <developerConnection>scm:git:https://gitbox.apache.org/repos/asf/sling-org-apache-sling-junit-remote.git</developerConnection>
         <url>https://github.com/apache/sling-org-apache-sling-junit-remote.git</url>
     </scm>
-    
+
+    <properties>
+        <sling.java.version>17</sling.java.version>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.osgi</groupId>
@@ -56,9 +60,17 @@
             <version>1.1.6</version>
             <scope>provided</scope>
         </dependency>
+
+        <!-- junit4 for the @Rule and ParentRunner based implementations -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <!-- junit5 for the DynamicTest based implementations -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
             <scope>compile</scope>
         </dependency>
         <!-- SLF4J is needed at runtime (whenever SlingRemoteTestRunner is executed) -->
@@ -91,16 +103,16 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-          <groupId>org.apache.sling</groupId>
-          <artifactId>org.apache.sling.jcr.contentparser</artifactId>
-          <version>1.2.2</version>
-          <scope>provided</scope>
-          <exclusions>
-            <exclusion>
-                <groupId>*</groupId>
-                <artifactId>*</artifactId>
-            </exclusion>
-        </exclusions>
-    </dependency>
+            <groupId>org.apache.sling</groupId>
+            <artifactId>org.apache.sling.jcr.contentparser</artifactId>
+            <version>1.2.2</version>
+            <scope>provided</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>*</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
     </dependencies>
 </project>

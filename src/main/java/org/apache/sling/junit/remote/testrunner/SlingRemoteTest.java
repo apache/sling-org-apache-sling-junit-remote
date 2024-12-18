@@ -1,18 +1,20 @@
 /*
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *   http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
  */
 package org.apache.sling.junit.remote.testrunner;
 
@@ -20,7 +22,6 @@ import java.io.IOException;
 
 import jakarta.json.JsonException;
 import jakarta.json.JsonObject;
-
 import org.junit.runner.Description;
 
 /** Info about a remote tests, as provided by the Sling JUnit servlet */
@@ -29,11 +30,11 @@ class SlingRemoteTest {
     private final String description;
     private final String failure;
     private final String trace;
-    
+
     public static final String DESCRIPTION = "description";
     public static final String FAILURE = "failure";
     public static final String TRACE = "trace";
-    
+
     SlingRemoteTest(Class<?> testClass, JsonObject json) throws JsonException {
         this.testClass = testClass;
         description = json.containsKey(DESCRIPTION) ? json.getString(DESCRIPTION) : null;
@@ -44,13 +45,21 @@ class SlingRemoteTest {
             trace = null;
         }
     }
-    
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getFailure() {
+        return failure;
+    }
+
     Description describe() {
         return Description.createTestDescription(testClass, description);
     }
-    
+
     void run() {
-        if(failure != null && failure.trim().length() > 0) {
+        if (failure != null && failure.trim().length() > 0) {
             try {
                 throw new RemoteExecutionException(failure, trace);
             } catch (NumberFormatException e) {
