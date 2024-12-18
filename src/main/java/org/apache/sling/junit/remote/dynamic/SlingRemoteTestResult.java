@@ -16,17 +16,13 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.apache.sling.junit.remote.testrunner;
+package org.apache.sling.junit.remote.dynamic;
 
-import java.io.IOException;
+import javax.json.JsonException;
+import javax.json.JsonObject;
 
-import jakarta.json.JsonException;
-import jakarta.json.JsonObject;
-import org.junit.runner.Description;
+class SlingRemoteTestResult {
 
-/** Info about a remote tests, as provided by the Sling JUnit servlet */
-class SlingRemoteTest {
-    private final Class<?> testClass;
     private final String description;
     private final String failure;
     private final String trace;
@@ -35,8 +31,7 @@ class SlingRemoteTest {
     public static final String FAILURE = "failure";
     public static final String TRACE = "trace";
 
-    SlingRemoteTest(Class<?> testClass, JsonObject json) throws JsonException {
-        this.testClass = testClass;
+    SlingRemoteTestResult(JsonObject json) throws JsonException {
         description = json.containsKey(DESCRIPTION) ? json.getString(DESCRIPTION) : null;
         failure = json.containsKey(FAILURE) ? json.getString(FAILURE) : null;
         if (failure != null) {
@@ -54,20 +49,7 @@ class SlingRemoteTest {
         return failure;
     }
 
-    Description describe() {
-        return Description.createTestDescription(testClass, description);
-    }
-
-    void run() {
-        if (failure != null && failure.trim().length() > 0) {
-            try {
-                throw new RemoteExecutionException(failure, trace);
-            } catch (NumberFormatException e) {
-                // error reading stack
-            } catch (IOException e) {
-                // error reading stack
-            }
-            // TODO: distinguish between assumption failures and regular exceptions
-        }
+    public String getTrace() {
+        return trace;
     }
 }

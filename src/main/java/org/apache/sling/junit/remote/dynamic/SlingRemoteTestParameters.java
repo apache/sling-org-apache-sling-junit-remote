@@ -16,14 +16,22 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.apache.sling.junit.remote.testrunner;
+package org.apache.sling.junit.remote.dynamic;
 
-/** Tests classes can implement this interface to check the
- *  number of tests that are executed remotely. This is useful
- *  when tests are loaded dynamically, to check that all the required
- *  tests have indeed been executed, for example in continuous
- *  integration.
+/** Test class "proxies" implement this to indicate where to
+ *  run the tests.
  */
-public interface SlingTestsCountChecker {
-    void checkNumberOfTests(int numberOfTestsExecuted);
+public interface SlingRemoteTestParameters {
+    /** Return the URL of the JUnit servlet */
+    String getJunitServletUrl();
+
+    /** Return the optional selector for the test classes to run,
+     *  for example "org.apache.sling.testing.samples.sampletests.JUnit4Test"
+     */
+    String getTestClassesSelector();
+
+    /** Return the optional selector for the test methods to run,
+     *  for example "someMethodName"
+     */
+    String getTestMethodSelector();
 }

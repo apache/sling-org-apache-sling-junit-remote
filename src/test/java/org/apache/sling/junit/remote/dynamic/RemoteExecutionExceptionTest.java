@@ -16,7 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.apache.sling.junit.remote.testrunner;
+package org.apache.sling.junit.remote.dynamic;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -24,9 +24,10 @@ import java.io.StringWriter;
 import java.util.Arrays;
 import java.util.List;
 
+import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class RemoteExecutionExceptionTest {
 
@@ -41,21 +42,21 @@ public class RemoteExecutionExceptionTest {
             trace = writer.toString();
         }
         RemoteExecutionException e = RemoteExecutionException.getExceptionFromTrace(trace);
-        Assert.assertThat(e.getMessage(), Matchers.equalTo("java.lang.IllegalStateException: Some message"));
+        MatcherAssert.assertThat(e.getMessage(), Matchers.equalTo("java.lang.IllegalStateException: Some message"));
         List<StackTraceElement> stackTraceElements =
                 Arrays.asList(new RemoteExecutionException("some failure", trace).getStackTrace());
-        Assert.assertThat(
+        MatcherAssert.assertThat(
                 stackTraceElements,
                 Matchers.hasItem(new StackTraceElement(
-                        "org.apache.sling.junit.remote.testrunner.RemoteExecutionExceptionTest",
+                        "org.apache.sling.junit.remote.dynamic.RemoteExecutionExceptionTest",
                         "testGetStackTraceFromString",
                         "RemoteExecutionExceptionTest.java",
-                        37)));
+                        38)));
         // compare original stacktrace with newly generated one from the exception
         StringWriter writer = new StringWriter();
         e.printStackTrace(new PrintWriter(writer));
         String newTrace = writer.toString();
-        Assert.assertEquals(trace, newTrace);
+        Assertions.assertEquals(trace, newTrace);
     }
 
     @Test
@@ -74,34 +75,35 @@ public class RemoteExecutionExceptionTest {
         }
 
         RemoteExecutionException e = RemoteExecutionException.getExceptionFromTrace(trace);
-        Assert.assertThat(e.getMessage(), Matchers.equalTo("java.lang.RuntimeException: Wrapper exception"));
+        MatcherAssert.assertThat(e.getMessage(), Matchers.equalTo("java.lang.RuntimeException: Wrapper exception"));
         List<StackTraceElement> stackTraceElements = Arrays.asList(e.getStackTrace());
-        Assert.assertThat(
+        MatcherAssert.assertThat(
                 stackTraceElements,
                 Matchers.hasItem(new StackTraceElement(
-                        "org.apache.sling.junit.remote.testrunner.RemoteExecutionExceptionTest",
+                        "org.apache.sling.junit.remote.dynamic.RemoteExecutionExceptionTest",
                         "testGetStackTraceFromStringWithNestedException",
                         "RemoteExecutionExceptionTest.java",
-                        68)));
+                        69)));
         // no original exception in the stack trace
-        Assert.assertThat(
+        MatcherAssert.assertThat(
                 stackTraceElements,
                 Matchers.not(Matchers.hasItem(new StackTraceElement(
-                        "org.apache.sling.junit.remote.testrunner.RemoteExecutionExceptionTest",
+                        "org.apache.sling.junit.remote.dynamic.RemoteExecutionExceptionTest",
                         "testGetStackTraceFromStringWithNestedException",
                         "RemoteExecutionExceptionTest.java",
-                        66))));
+                        67))));
 
         // cause must be set
-        Assert.assertNotNull("Cause must be set on the exception", e.getCause());
-        Assert.assertThat(e.getCause().getMessage(), Matchers.equalTo("java.lang.IllegalStateException: Some message"));
+        Assertions.assertNotNull(e.getCause(), "Cause must be set on the exception");
+        MatcherAssert.assertThat(
+                e.getCause().getMessage(), Matchers.equalTo("java.lang.IllegalStateException: Some message"));
         stackTraceElements = Arrays.asList(e.getCause().getStackTrace());
-        Assert.assertThat(
+        MatcherAssert.assertThat(
                 stackTraceElements,
                 Matchers.hasItem(new StackTraceElement(
-                        "org.apache.sling.junit.remote.testrunner.RemoteExecutionExceptionTest",
+                        "org.apache.sling.junit.remote.dynamic.RemoteExecutionExceptionTest",
                         "testGetStackTraceFromStringWithNestedException",
                         "RemoteExecutionExceptionTest.java",
-                        66)));
+                        67)));
     }
 }

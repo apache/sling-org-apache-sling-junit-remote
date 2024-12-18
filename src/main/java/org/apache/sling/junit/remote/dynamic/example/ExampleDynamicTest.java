@@ -16,11 +16,12 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.apache.sling.junit.remote.testrunner.dynamic;
+package org.apache.sling.junit.remote.dynamic.example;
 
 import java.util.stream.Stream;
 
-import org.apache.sling.junit.remote.testrunner.SlingRemoteTestParameters;
+import org.apache.sling.junit.remote.dynamic.SlingRemoteDynamicTestExecutor;
+import org.apache.sling.junit.remote.dynamic.SlingRemoteTestParameters;
 import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.TestFactory;
 

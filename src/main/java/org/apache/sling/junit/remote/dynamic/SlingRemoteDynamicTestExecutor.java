@@ -16,7 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.apache.sling.junit.remote.testrunner.dynamic;
+package org.apache.sling.junit.remote.dynamic;
 
 import javax.json.Json;
 import javax.json.JsonArray;
@@ -29,8 +29,6 @@ import java.util.stream.Stream;
 
 import org.apache.sling.jcr.contentparser.impl.JsonTicksConverter;
 import org.apache.sling.junit.remote.httpclient.RemoteTestHttpClient;
-import org.apache.sling.junit.remote.testrunner.SlingRemoteTestParameters;
-import org.apache.sling.junit.remote.testrunner.SlingTestsCountChecker;
 import org.apache.sling.testing.tools.http.RequestCustomizer;
 import org.apache.sling.testing.tools.http.RequestExecutor;
 import org.apache.sling.testing.tools.sling.SlingTestBase;
@@ -123,7 +121,7 @@ public class SlingRemoteDynamicTestExecutor {
         return children.stream()
                 .map(remoteTest -> DynamicTest.dynamicTest(remoteTest.getDescription(), () -> {
                     if (remoteTest.getFailure() != null) {
-                        throw new AssertionError(remoteTest.getFailure());
+                        throw new RemoteExecutionException(remoteTest.getFailure(), remoteTest.getTrace());
                     }
                 }));
     }

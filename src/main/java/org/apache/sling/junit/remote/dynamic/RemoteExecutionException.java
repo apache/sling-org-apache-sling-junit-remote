@@ -16,7 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.apache.sling.junit.remote.testrunner;
+package org.apache.sling.junit.remote.dynamic;
 
 import java.io.BufferedReader;
 import java.io.IOException;

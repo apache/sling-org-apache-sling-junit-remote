@@ -17,7 +17,7 @@
  * under the License.
  */
 
-@Version("1.1.1")
-package org.apache.sling.junit.remote.testrunner;
+@Version("1.0.0")
+package org.apache.sling.junit.remote.dynamic;
 
 import org.osgi.annotation.versioning.Version;
