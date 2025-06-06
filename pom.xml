@@ -30,7 +30,7 @@
     <artifactId>org.apache.sling.junit.remote</artifactId>
     <version>1.0.13-SNAPSHOT</version>
 
-    <name>Apache Sling JUnit Remote Tests Runners</name>
+    <name>Apache Sling JUnit Remote</name>
     <description>Utilities to run server-side JUnit tests remotely</description>
     
     <scm>
